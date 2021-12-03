@@ -17,22 +17,47 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.ConsoleAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.ConfigurationFactory;
+import org.apache.logging.log4j.core.config.ConfigurationSource;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.core.config.xml.XmlConfigurationFactory;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignF;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
+import lombok.Getter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Vector;
 
-public class App extends Application {
+import org.apache.logging.log4j.LogManager;
 
-    private Vector<Course> courses;
-    private AppView currentView;
-    private final Map<String, AppView> views;
-    private BorderPane mainLayout;
-    private ChoiceBox<String> depts;
-    private Scene scene;
+@Log4j2
+public class App extends Application {
+   @Getter @Setter
+   private Vector<Course> courses;
+   @Getter @Setter
+   private AppView currentView;
+   private final Map<String, AppView> views;
+   @Getter @Setter
+   private BorderPane mainLayout;
+   @Getter @Setter
+   private ChoiceBox<String> depts;
+   @Getter @Setter
+   private Scene scene;
+
 
     public App() {
         views = Maps.newHashMap();
@@ -61,6 +86,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("Course View");
 
         Button display = new Button("Display (dept.)");
@@ -126,9 +152,6 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    public Vector<Course> getCourses() {
-        return courses;
-    }
 
     private void setView(String viewName) {
         mainLayout.getChildren().remove(currentView.getView());
@@ -137,6 +160,9 @@ public class App extends Application {
         mainLayout.requestLayout();
     }
 
+    public Scene getScene(){
+        return scene;
+    }
     public void showCourseForm() {
         setView("CourseForm");
         currentView.updateData();
@@ -171,7 +197,22 @@ public class App extends Application {
         courses.add(course);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+
+        Logger logger = LogManager.getLogger();
+        Level testLevel = logger.getLevel();
+        System.out.println(testLevel.toString());
+
+        // LogEvent of DEBUG message
+        logger.log(Level.FATAL, "BANANA");
+
+        // LogEvent of Error message for Logger configured as FATAL
+        logger.log(Level.ERROR, "GRAPE");
+
+        // LogEvent of ERROR message that would be handled by Root
+        logger.log(Level.ERROR, "Pineapple (not a pen) ");
         Application.launch(args);
     }
 }
+

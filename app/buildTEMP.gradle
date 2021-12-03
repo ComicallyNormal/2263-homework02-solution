@@ -11,7 +11,6 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'jacoco'
-    id "io.freefair.lombok" version "6.3.0"
 
 }
 
@@ -22,15 +21,8 @@ repositories {
 }
 
 dependencies {
-   // implementation 'junit:junit:4.13.1'
-
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
-
-    //Mockito
-    // https://mvnrepository.com/artifact/org.mockito/mockito-all
-    testImplementation 'org.mockito:mockito-all:1.10.19'
-
 
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
@@ -43,20 +35,6 @@ dependencies {
     implementation 'org.kordamp.ikonli:ikonli-fontawesome5-pack:12.1.0'
     implementation 'org.kordamp.ikonli:ikonli-materialdesign2-pack:12.1.0'
     implementation 'org.kordamp.ikonli:ikonli-material2-pack:12.1.0'
-
-
-    //JavaFX testing
-    implementation "org.testfx:testfx-core:4.0.16-alpha"
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
-    implementation "org.testfx:testfx-junit5:4.0.16-alpha"
-
-    //log4j core and api
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
-
-
 }
 
 application {
@@ -98,7 +76,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.85
+                minimum = 0.5
             }
         }
 
