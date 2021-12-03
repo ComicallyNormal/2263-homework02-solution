@@ -1,7 +1,16 @@
-package edu.isu.cs.cs2263.hw02;
+package edu.isu.cs.cs2263.hw02.data;
 
 import edu.isu.cs.cs2263.hw02.data.Course;
 import org.junit.jupiter.api.Test;
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
